@@ -1,24 +1,36 @@
 header {
-   display: flex;
-   flex-direction: row;
-   justify-content: end;
-   background-image: linear-gradient(to right, violet, darkblue);
-   color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    background-image: linear-gradient(to right, violet, darkblue);
+    color: #fff;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
 }
+
 header h1 {
     padding-right: 100px;
 }
 
-#spread {display: flex;
+.searchBar {
+    padding-left: 50px;
+
+}
+
+#spread {
+    display: flex;
     align-items: center;
 }
-#spread ul {
+
+#spread .card {
     background-image: linear-gradient(to bottom, #605f5f, #000000);
     color: #FFF;
-padding: 5px;
+    padding: 5px;
     margin: 20px;
     width: 20%;
 }
+
 #button {
     color: #FFF;
     background-color: #1d68a0;
