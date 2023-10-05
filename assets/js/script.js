@@ -20,6 +20,7 @@ button.on("click", function () {
         })
         .then(function (data) {
             console.log(data);
+            forecast.empty();
             var currCity = data.city.name;
             var currTemp = data.list[0].main.temp;
             var currWind = data.list[0].wind.speed;
