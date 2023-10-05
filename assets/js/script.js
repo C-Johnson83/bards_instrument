@@ -45,8 +45,8 @@ button.addEventListener("click", function () {
                 var humidityVal = data.list[j].main.humidity;
                 var dateVal = data.list[j].dt_txt;
                 var iconVal = data.list[j].weather[0].icon;
-                var icon = 'https://openweathermap.org/img/wn/' + iconVal + '.png';
-
+                var icon = 'https://openweathermap.org/img/wn/' + iconVal + '@2x.png';
+                console.log(icon.valueOf);
                 dateVal = dateVal.slice(0, 10);
 
                 day[i].textContent = dateVal;
@@ -56,4 +56,5 @@ button.addEventListener("click", function () {
                 humidity[i].textContent = `Humidity: ${humidityVal}%`;
                 j = j + 8;
             }
-        });});
+        });
+});
