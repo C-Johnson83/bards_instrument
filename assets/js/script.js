@@ -23,17 +23,17 @@ button.addEventListener("click", function () {
         })
         .then(function (data) {
             console.log(data);
-            var currentCity = data.city.name;
-            var currentTemp = data.list[0].main.temp;
-            var currentWind = data.list[0].wind.speed;
-            var currentHumidity = data.list[0].main.humidity;
+            var currCity = data.city.name;
+            var currTemp = data.list[0].main.temp;
+            var currWind = data.list[0].wind.speed;
+            var currHumidity = data.list[0].main.humidity;
              dateVal = data.list[0].dt_txt;
             dateVal = dateVal.slice(0, 10);
 
-            city.textContent = 'Current weather of ' + currentCity + ', ' + dateVal;
-            currentTemp.textContent = `Temperature: ${convert(currentTemp) + '°F'}`;
-            currentwind.textContent = `Wind Speed: ${(currentWind * 2.23694).toFixed(2)} mph`;
-            currenthumidity.textContent = `Humidity: ${currentHumidity}%`;
+            city.textContent = 'Current weather of ' + currCity + ', ' + dateVal;
+            currentTemp.textContent = `Temperature: ${convert(currTemp) + '°F'}`;
+            currentwind.textContent = `Wind Speed: ${(currWind * 2.23694).toFixed(2)} mph`;
+            currenthumidity.textContent = `Humidity: ${currHumidity}%`;
             for (var i = 0; i < day.length; i++) {
                 var tempVal = data.list[i].main.temp;
                 var windVal = data.list[i].wind.speed;
