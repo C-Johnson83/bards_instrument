@@ -1,6 +1,6 @@
 var cityName = $('#cityInput');
 var button = $('#searchButton');
-var API = apiKey.key;
+var API = 'cebdbe1753a5af12101fc266dce79204';
 var url = "https://api.openweathermap.org/data/2.5/forecast?q="
 var city = $('#currentCity');
 var forecast = $('#spread');
