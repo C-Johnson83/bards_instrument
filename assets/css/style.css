@@ -24,7 +24,7 @@ align-items: center;
 
 }
 
-#searchButton {
+#searchButton, #cityButton {
     color: #FFF;
     background-color: #1d68a0;
     height: 30px;
