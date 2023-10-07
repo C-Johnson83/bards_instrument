@@ -7,18 +7,20 @@ var forecast = $('#spread');
 var currentTemp = $('#currentTemp');
 var currentwind = $('#currentWind');
 var currenthumidity = $('#currentHumidity');
+var searchedCities = [];
+
 function convert(val) {
     return ((val - 273.15) * 9 / 5 + 32).toFixed(2);
 }
 
 button.on("click", function () {
-    console.log(cityName.val());
+    
     var queryUrl = url + cityName.val() + "&appid=" + API;
     fetch(queryUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
             console.log(data);
             forecast.empty();
             var currCity = data.city.name;
@@ -27,7 +29,7 @@ button.on("click", function () {
             var currHumidity = data.list[0].main.humidity;
             dateVal = data.list[0].dt_txt;
             dateVal = dateVal.slice(0, 10);
-
+            
             city.text('Current weather of ' + currCity + ', ' + dateVal);
             currentTemp.text ( `Temperature: ${convert(currTemp) + '°F'}`);
             currentwind.text ( `Wind Speed: ${(currWind * 2.23694).toFixed(2)} mph`);
@@ -40,22 +42,26 @@ button.on("click", function () {
                 var iconVal = data.list[i].weather[0].icon;
                 var icon = 'https://openweathermap.org/img/wn/' + iconVal + '@2x.png';
                 dateVal = dateVal.slice(0, 10); // removes the time from the date
-
-
+                
+                
                 var card = $('<div class="card"></div>');
                 var day = $('<h4>' + dateVal + '</h4>');
                 var png = $('<img src="' + icon + '">');
                 var temp = $('<p>Temperature: ' + convert(tempVal) + '°F</p>');
                 var wind = $('<p>Wind Speed: ' + (windVal * 2.23694).toFixed(2) + ' mph</p>');
                 var humidity = $('<p>Humidity: ' + humidityVal + '%</p>');
-
+                
                 card.append(day);
                 card.append(png);
                 card.append(temp);
                 card.append(wind);
                 card.append(humidity);
-
+                
                 forecast.append(card);
+                
             }
         });
+        localStorage.setItem('city', cityName.val());
+        searchedCities.push(cityName.val());
+        console.log(searchedCities);
 });
