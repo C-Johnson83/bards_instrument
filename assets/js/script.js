@@ -1,4 +1,4 @@
-var cityName = $('#cityInput');
+var cityName ;
 var button = $('#searchButton');
 var citySearched = $('#cityButton');
 var API = 'cebdbe1753a5af12101fc266dce79204';
@@ -16,6 +16,7 @@ function convert(val) {
 }
 
 button.on("click", function () {
+    cityName = $('#cityInput');
     destination = cityName.val();
     getWeather(destination);
    
