@@ -19,6 +19,7 @@ button.on("click", function () {
     cityName = $('#cityInput');
     destination = cityName.val();
     getWeather(destination);
+    cityName.val('');
    
 });
 
