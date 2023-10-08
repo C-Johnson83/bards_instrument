@@ -2,7 +2,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    background-image: linear-gradient(to right, violet, darkblue);
+    background-image: linear-gradient(to right, #800080, #00008b);
     color: #fff;
     border-style: solid;
     border-width: 1px;
@@ -12,38 +12,64 @@ header {
 header h1 {
     padding-right: 100px;
 }
+
+main {
+    background-color: rgb(195, 198, 198);
+}
+
 .display {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.searchArea, .searchBar, #searchedCities {
+.searchArea,
+.searchBar,
+#searchedCities {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
-    
+
 }
+
 #cityInput {
-    
+
     text-transform: uppercase;
 }
-#searchButton, #cityButton {
+
+#searchButton {
+    border-radius: 5px;
+    border-color: #000000;
     color: #FFF;
-    background-color: #1d68a0;
+    background-color: #605f5f;
+    width: 188px;
+
+}
+
+#cityButton {
+    border-radius: 5px;
+    border-color: #000000;
+    margin: 10px;
+    color: #FFF;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #680084, #480087);
     height: 30px;
     width: 200px;
 
 }
+
 #spread {
     display: flex;
     align-items: center;
+    font-size: 80%;
+    font-weight: bold;
+    text-align: center;
 }
 
 #spread .card {
     background-image: linear-gradient(to bottom, #605f5f, #000000);
     color: #FFF;
-    padding: 5px;
-    margin: 20px;
+    padding: 1px;
+    margin: 10px;
     width: 20%;
 }
