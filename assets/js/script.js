@@ -17,17 +17,17 @@ button.on("click", function () {
     currentIcon.empty(); // emptying the current icon
     cityName = $('#cityInput');
     destination = cityName.val();
+    console.log("destination value", destination);
     getWeather(destination);
     cityName.val('');
 
 });
 
 // Listening event and function for the searched city buttons
-$(document).on("click", "#cityButton", function (event) {
+$(document).on("click", "#cityButton", function () {
     currentIcon.empty(); // emptying the current icon
     cityName = $(this).text();;
-    console.log(event)
-    console.log(cityName);
+    console.log("button value", cityName);
     getWeather(cityName);
 });
 
@@ -44,13 +44,17 @@ function getWeather(cityName) {
             var currCity = data.city.name; // getting the current city name
             var cityButton = $('<button id="cityButton">'); // creating a button for the searched city
 
-            // storing the values for the searched city in the local storage
-            localStorage.setItem('city', cityName.val);
-            searchedCities.push(cityName.val);
+            
+            if (searchedCities.includes(cityName)) {
+            } else {
+                // storing the values for the searched city in the local storage
+                localStorage.setItem('city', cityName);
+                searchedCities.push(cityName);
             // creating a button for the searched city and appending it to the recent searches list
             cityButton.text(currCity);
+            console.log(searchedCities);
             searches.append(cityButton);
-
+            }
             // loop through the data to get the 5 day forecast
             for (var i = 0; i < 40; i += 8) {
                 var tempVal = data.list[i].main.temp; // get the temp value
@@ -69,12 +73,14 @@ function getWeather(cityName) {
 
                 if (i < 1){
                 // setting the values for the current weather
-                city.text('Current weather of ' + currCity + ', ' + dateVal + ' - ');
+                city.text('Current weather of ' + currCity + ', ' + dateVal);
                 png.attr('id', 'weatherIcon');
+                console.log(png);
                 currentIcon.append(png);
                 currentTemp.text(`Temperature: ${tempVal + '°F'}`);
                 currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
                 currenthumidity.text(`Humidity: ${humidityVal}%`);
+         
                 } else {
                 // create the card, date, icon, and weather elements 
                 // Append the values to the card
@@ -85,8 +91,8 @@ function getWeather(cityName) {
                 card.append(humidity);
                 // Append the card to the forecast
                 forecast.append(card);
-                }
+                }}
             }
-        });
+       ); };
 
-};
+
