@@ -67,7 +67,7 @@ main {
 }
 
 #spread .card {
-    background-image: linear-gradient(to bottom, #1b365f, #000000);
+    background-image: linear-gradient(to bottom,blue, #1b365f, #000000);
     color: #FFF;
     padding: 1px;
     margin: 10px;
