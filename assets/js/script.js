@@ -67,8 +67,8 @@ function getWeather(cityName) {
 
                 if (i < 1){
                 // setting the values for the current weather
-                currentIcon.attr('src', icon);
-                city.text('Current weather of ' + currCity + ', ' + dateVal + ' - ' + icon);
+                city.text('Current weather of ' + currCity + ', ' + dateVal + ' - ');
+                city.append(png);
                 currentTemp.text(`Temperature: ${tempVal + '°F'}`);
                 currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
                 currenthumidity.text(`Humidity: ${humidityVal}%`);

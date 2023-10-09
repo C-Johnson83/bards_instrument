@@ -46,6 +46,19 @@ main {
 
 }
 
+#now {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5PX;
+    padding: 10PX;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    background-color: #1b365f;
+    color: #FFF;
+}
+
 #cityButton {
     border-radius: 5px;
     border-color: #000000;
@@ -67,7 +80,7 @@ main {
 }
 
 #spread .card {
-    background-image: linear-gradient(to bottom,blue, #1b365f, #000000);
+    background-image: linear-gradient(to bottom, blue, #1b365f, #000000);
     color: #FFF;
     padding: 1px;
     margin: 10px;
