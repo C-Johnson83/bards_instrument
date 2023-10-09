@@ -14,6 +14,7 @@ var searchedCities = [];
 
 // Listening event and function for the initial search event
 button.on("click", function () {
+    currentIcon.empty(); // emptying the current icon
     cityName = $('#cityInput');
     destination = cityName.val();
     getWeather(destination);
@@ -23,6 +24,7 @@ button.on("click", function () {
 
 // Listening event and function for the searched city buttons
 $(document).on("click", "#cityButton", function (event) {
+    currentIcon.empty(); // emptying the current icon
     cityName = $(this).text();;
     console.log(event)
     console.log(cityName);
@@ -68,7 +70,8 @@ function getWeather(cityName) {
                 if (i < 1){
                 // setting the values for the current weather
                 city.text('Current weather of ' + currCity + ', ' + dateVal + ' - ');
-                city.append(png);
+                png.attr('id', 'weatherIcon');
+                currentIcon.append(png);
                 currentTemp.text(`Temperature: ${tempVal + '°F'}`);
                 currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
                 currenthumidity.text(`Humidity: ${humidityVal}%`);

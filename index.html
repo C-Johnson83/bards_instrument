@@ -21,17 +21,20 @@
                 <input type="text" placeholder="Search for a city..." id="cityInput">
                 <input type="submit" value="Search" id="searchButton">
                 <p><br>---------------------------------------<br></p>
-                <div id="searchedCities">Recent Searches</div> 
+                <div id="searchedCities">Recent Searches</div>
             </div>
         </section>
 
         <aside class="col-9  container results">
-            <section id="now">
-            <h3 id="currentCity">-City-<img src="" alt="icon1" id="iconCurrent"></h3>
-            <p id="currentTemp">-Temperature-</p>
-            <p id="currentWind">-Wind-</p>
-            <p id="currentHumidity">-Humidity-</p>
-        </section>
+            <section id="split">
+                <div class="col-7" id="now">
+                    <h3 id="currentCity">-City-</h3>
+                    <p id="currentTemp">-Temperature-</p>
+                    <p id="currentWind">-Wind-</p>
+                    <p id="currentHumidity">-Humidity-</p>
+                </div>
+                <div class="col-2" id="iconCurrent"></div>
+            </section>
             <section id="then">
                 <h3>Future Forecast</h3>
                 <div id="spread"></div>
