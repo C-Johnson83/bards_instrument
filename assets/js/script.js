@@ -12,11 +12,6 @@ var currentwind = $('#currentWind');
 var currenthumidity = $('#currentHumidity');
 var searchedCities = [];
 
-// Function to change the temperature to Fahrenheit
-function convert(val) {
-    return ((val - 273.15) * 9 / 5 + 32).toFixed(2);
-}
-
 // Listening event and function for the initial search event
 button.on("click", function () {
     cityName = $('#cityInput');
@@ -36,7 +31,7 @@ $(document).on("click", "#cityButton", function (event) {
 
 // Function with API to get the weather for the searched city
 function getWeather(cityName) {
-    var queryUrl = url + cityName + "&appid=" + API ;
+    var queryUrl = url + cityName + "&appid=" + API + "&units=imperial";
     fetch(queryUrl)
         .then(function (response) {
             return response.json();
@@ -66,7 +61,7 @@ function getWeather(cityName) {
                 var card = $('<div class="card"></div>'); // creating a card 
                 var day = $('<h4>' + dateVal + '</h4>'); // creating the date 
                 var png = $('<img src="' + icon + '">'); // creating the icon image 
-                var temp = $('<p>Low Temperature: ' + convert(tempVal) + '°F</p>'); // creating the temp value 
+                var temp = $('<p>Low Temperature: ' + tempVal + '°F</p>'); // creating the temp value 
                 var wind = $('<p>Wind Speed: ' + (windVal * 2.23694).toFixed(2) + ' mph</p>'); // creating the wind speed value 
                 var humidity = $('<p>Humidity: ' + humidityVal + '%</p>'); // creating the humidity value 
 
@@ -74,7 +69,7 @@ function getWeather(cityName) {
                 // setting the values for the current weather
                 currentIcon.attr('src', icon);
                 city.text('Current weather of ' + currCity + ', ' + dateVal + ' - ' + icon);
-                currentTemp.text(`Temperature: ${convert(tempVal) + '°F'}`);
+                currentTemp.text(`Temperature: ${tempVal + '°F'}`);
                 currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
                 currenthumidity.text(`Humidity: ${humidityVal}%`);
                 } else {
