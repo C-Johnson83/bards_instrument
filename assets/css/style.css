@@ -94,6 +94,9 @@ main {
     margin: 10px;
     width: 20%;
 }
+.card h4 {
+    margin-top: 20px;
+}
 #currentCity img {
 width: 50%;
 }
