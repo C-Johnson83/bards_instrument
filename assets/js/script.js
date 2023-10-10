@@ -2,8 +2,8 @@ var cityName;
 var button = $('#searchButton');
 var citySearched = $('#cityButton');
 var API = 'cebdbe1753a5af12101fc266dce79204';
-var url = "https://api.openweathermap.org/data/2.5/forecast?q="
-var url2 = "https://api.openweathermap.org/data/2.5/weather?q="
+var url = "https://api.openweathermap.org/data/2.5/weather?q="
+var url2 = "https://api.openweathermap.org/data/2.5/forecast?q="
 var city = $('#currentCity');
 var forecast = $('#spread');
 var currentIcon = $('#iconCurrent');
@@ -32,10 +32,33 @@ $(document).on("click", "#cityButton", function () {
     getWeather(cityName);
 });
 
-// Function with API to get the weather for the searched city
+// Function with API calls to get the weather for the searched city
 function getWeather(cityName) {
-    var queryUrl = url + cityName + "&appid=" + API + "&units=imperial";
+    var queryUrl = url + cityName + "&appid=" + API + "&units=imperial"; // for the current weather
     fetch(queryUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data); // checking the data
+            var tempVal = data.main.temp; // get the temp value
+            var windVal = data.wind.speed; // get the wind speed
+            var humidityVal = data.main.humidity; // get the humidity value
+            var iconVal = data.weather[0].icon; // get the icon value
+            var icon = 'https://openweathermap.org/img/wn/' + iconVal + '@2x.png'; // get the icon image
+            var png = $('<img src="' + icon + '">'); // creating the icon image
+            // // setting the values for the current weather
+            city.text('Current weather of ' + cityName);
+            png.attr('id', 'weatherIcon');
+            console.log(png);
+            currentIcon.append(png);
+            currentTemp.text(`Temperature: ${tempVal + '°F'}`);
+            currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
+            currenthumidity.text(`Humidity: ${humidityVal}%`);
+    
+        });
+    var queryUrl2 = url2 + cityName + "&appid=" + API + "&units=imperial"; // for the weather forecast
+    fetch(queryUrl2)
         .then(function (response) {
             return response.json();
         })
@@ -84,29 +107,6 @@ function getWeather(cityName) {
             }
         });
 
-    var queryUrl2 = url2 + cityName + "&appid=" + API + "&units=imperial";
-    fetch(queryUrl2)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data); // checking the data
-            var tempVal = data.main.temp; // get the temp value
-            var windVal = data.wind.speed; // get the wind speed
-            var humidityVal = data.main.humidity; // get the humidity value
-            var iconVal = data.weather[0].icon; // get the icon value
-            var icon = 'https://openweathermap.org/img/wn/' + iconVal + '@2x.png'; // get the icon image
-            var png = $('<img src="' + icon + '">'); // creating the icon image
-            // // setting the values for the current weather
-            city.text('Current weather of ' + cityName);
-            png.attr('id', 'weatherIcon');
-            console.log(png);
-            currentIcon.append(png);
-            currentTemp.text(`Temperature: ${tempVal + '°F'}`);
-            currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
-            currenthumidity.text(`Humidity: ${humidityVal}%`);
-
-        });
 };
 
 
