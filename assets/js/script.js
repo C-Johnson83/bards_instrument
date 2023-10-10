@@ -3,6 +3,7 @@ var button = $('#searchButton');
 var citySearched = $('#cityButton');
 var API = 'cebdbe1753a5af12101fc266dce79204';
 var url = "https://api.openweathermap.org/data/2.5/forecast?q="
+var url2 = "https://api.openweathermap.org/data/2.5/weather?q="
 var city = $('#currentCity');
 var forecast = $('#spread');
 var currentIcon = $('#iconCurrent');
@@ -44,16 +45,16 @@ function getWeather(cityName) {
             var currCity = data.city.name; // getting the current city name
             var cityButton = $('<button id="cityButton">'); // creating a button for the searched city
 
-            
+
             if (searchedCities.includes(cityName)) {
             } else {
                 // storing the values for the searched city in the local storage
                 localStorage.setItem('city', cityName);
                 searchedCities.push(cityName);
-            // creating a button for the searched city and appending it to the recent searches list
-            cityButton.text(currCity);
-            console.log(searchedCities);
-            searches.append(cityButton);
+                // creating a button for the searched city and appending it to the recent searches list
+                cityButton.text(currCity);
+                console.log(searchedCities);
+                searches.append(cityButton);
             }
             // loop through the data to get the 5 day forecast
             for (var i = 0; i < 40; i += 8) {
@@ -71,17 +72,6 @@ function getWeather(cityName) {
                 var wind = $('<p>Wind Speed: ' + (windVal * 2.23694).toFixed(2) + ' mph</p>'); // creating the wind speed value 
                 var humidity = $('<p>Humidity: ' + humidityVal + '%</p>'); // creating the humidity value 
 
-                if (i < 1){
-                // setting the values for the current weather
-                city.text('Current weather of ' + currCity + ', ' + dateVal);
-                png.attr('id', 'weatherIcon');
-                console.log(png);
-                currentIcon.append(png);
-                currentTemp.text(`Temperature: ${tempVal + '°F'}`);
-                currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
-                currenthumidity.text(`Humidity: ${humidityVal}%`);
-         
-                } else {
                 // create the card, date, icon, and weather elements 
                 // Append the values to the card
                 card.append(day);
@@ -91,8 +81,32 @@ function getWeather(cityName) {
                 card.append(humidity);
                 // Append the card to the forecast
                 forecast.append(card);
-                }}
             }
-       ); };
+        });
+
+    var queryUrl2 = url2 + cityName + "&appid=" + API + "&units=imperial";
+    fetch(queryUrl2)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data); // checking the data
+            var tempVal = data.main.temp; // get the temp value
+            var windVal = data.wind.speed; // get the wind speed
+            var humidityVal = data.main.humidity; // get the humidity value
+            var iconVal = data.weather[0].icon; // get the icon value
+            var icon = 'https://openweathermap.org/img/wn/' + iconVal + '@2x.png'; // get the icon image
+            var png = $('<img src="' + icon + '">'); // creating the icon image
+            // // setting the values for the current weather
+            city.text('Current weather of ' + cityName);
+            png.attr('id', 'weatherIcon');
+            console.log(png);
+            currentIcon.append(png);
+            currentTemp.text(`Temperature: ${tempVal + '°F'}`);
+            currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
+            currenthumidity.text(`Humidity: ${humidityVal}%`);
+
+        });
+};
 
 

@@ -39,7 +39,7 @@ main {
 #cityInput {
     border-radius: 50px;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     width: 95%;
 }
 
@@ -88,7 +88,7 @@ main {
 
 #spread .card {
     border-radius: 50px;
-    background-image: linear-gradient(to bottom, blue, #1b365f, #000000);
+    background-image: linear-gradient(to bottom, #1b365f, #000000);
     color: #FFF;
     padding: 1px;
     margin: 10px;
@@ -103,7 +103,6 @@ width: 50%;
     justify-content: center;
 }
 #weatherIcon {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    margin: 10px;
+   width: 125%;
 }
