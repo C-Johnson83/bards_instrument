@@ -11,17 +11,17 @@ var searches = $('#searchedCities');
 var currentTemp = $('#currentTemp');
 var currentwind = $('#currentWind');
 var currenthumidity = $('#currentHumidity');
-var searchedCities = [];
+var searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
 
 // Listening event and function for the initial search event
 button.on("click", function () {
     currentIcon.empty(); // emptying the current icon
     cityName = $('#cityInput');
     destination = cityName.val();
+    console.log(cityName);
     console.log("destination value", destination);
     getWeather(destination);
     cityName.val('');
-
 });
 
 // Listening event and function for the searched city buttons
@@ -55,7 +55,6 @@ function getWeather(cityName) {
             currentTemp.text(`Temperature: ${tempVal + '°F'}`);
             currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
             currenthumidity.text(`Humidity: ${humidityVal}%`);
-    
         });
     var queryUrl2 = url2 + cityName + "&appid=" + API + "&units=imperial"; // for the weather forecast
     fetch(queryUrl2)
@@ -64,19 +63,20 @@ function getWeather(cityName) {
         })
         .then(function (data) {
             console.log(data); // checking the data
-            forecast.empty(); // emptying the forecast cards
-            var currCity = data.city.name; // getting the current city name
+            forecast.empty(); // emptying the forecast cards           
             var cityButton = $('<button id="cityButton">'); // creating a button for the searched city
 
-
-            if (searchedCities.includes(cityName)) {
+            // Check if searched city name is in local storage
+            if (searchedCities.includes(cityName)) { // if it is, then do nothing
             } else {
-                // storing the values for the searched city in the local storage
-                localStorage.setItem('city', cityName);
+                // if it is not, then store the city name in local storage
                 searchedCities.push(cityName);
-                // creating a button for the searched city and appending it to the recent searches list
-                cityButton.text(currCity);
                 console.log(searchedCities);
+                console.log(localStorage);
+                localStorage.setItem('searchedCities', JSON.stringify(searchedCities));
+                // creating a button for the searched city and appending it to the recent searches list
+                console.log(searchedCities);
+                cityButton.text(cityName);
                 searches.append(cityButton);
             }
             // loop through the data to get the 5 day forecast
@@ -106,7 +106,11 @@ function getWeather(cityName) {
                 forecast.append(card);
             }
         });
-
 };
 
-
+// Loop through the searchedCities array and create buttons for each searched city in the local storage
+searchedCities.forEach(function(cityName) {
+    var cityButton = $('<button id="cityButton">');
+    cityButton.text(cityName);
+    searches.append(cityButton);
+});
