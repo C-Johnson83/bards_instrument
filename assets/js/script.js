@@ -12,6 +12,7 @@ var currentTemp = $('#currentTemp');
 var currentwind = $('#currentWind');
 var currenthumidity = $('#currentHumidity');
 var searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
+var reset = $('#reset');
 
 // Listening event and function for the initial search event
 button.on("click", function () {
@@ -30,6 +31,14 @@ $(document).on("click", "#cityButton", function () {
     cityName = $(this).text();;
     console.log("button value", cityName);
     getWeather(cityName);
+});
+
+//Listening event for the reset button
+reset.on("click", function(){
+    searchedCities = [];
+    searches.empty();
+    localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
+    console.log("A",searchedCities,"\nB", searches)
 });
 
 // Function with API calls to get the weather for the searched city
