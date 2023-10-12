@@ -44,7 +44,7 @@ main {
     width: 95%;
 }
 
-#searchButton {
+#searchButton, #reset {
     border-radius: 50px;
     border-color: #000000;
     color: #FFF;
