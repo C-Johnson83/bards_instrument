@@ -28,7 +28,11 @@ THEN I am again presented with current and future conditions for that city
 
 # Mock-Up 
 The following image shows the web application's appearance and functionality:
-![Alt text](assets/images/06-server-side-apis-homework-demo.png)
+![Mock-up](assets/images/06-server-side-apis-homework-demo.png)
+
+# My Dashboard
+The following is my dashboard
+![Dashboard](assets/images/MyDashboard.PNG)
 
 # Deployed Application
 https://c-johnson83.github.io/bards_instrument/
