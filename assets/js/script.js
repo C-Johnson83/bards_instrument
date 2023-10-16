@@ -19,8 +19,6 @@ button.on("click", function () {
     currentIcon.empty(); // emptying the current icon
     cityName = $('#cityInput');
     destination = cityName.val();
-    console.log(cityName);
-    console.log("destination value", destination);
     getWeather(destination);
     cityName.val('');
 });
@@ -29,16 +27,14 @@ button.on("click", function () {
 $(document).on("click", "#cityButton", function () {
     currentIcon.empty(); // emptying the current icon
     cityName = $(this).text();;
-    console.log("button value", cityName);
     getWeather(cityName);
 });
 
 //Listening event for the reset button
-reset.on("click", function(){
+reset.on("click", function () {
     searchedCities = [];
     searches.empty();
     localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
-    console.log("A",searchedCities,"\nB", searches)
 });
 
 // Function with API calls to get the weather for the searched city
@@ -53,13 +49,15 @@ function getWeather(cityName) {
             var tempVal = data.main.temp; // get the temp value
             var windVal = data.wind.speed; // get the wind speed
             var humidityVal = data.main.humidity; // get the humidity value
+            var dateVal = data.dt; // get the date value
+            var newDate = new Date(dateVal * 1000); // get the date
+            var date = newDate.toLocaleDateString("en-US");
             var iconVal = data.weather[0].icon; // get the icon value
             var icon = 'https://openweathermap.org/img/wn/' + iconVal + '@2x.png'; // get the icon image
             var png = $('<img src="' + icon + '">'); // creating the icon image
             // // setting the values for the current weather
-            city.text('Current weather of ' + cityName);
+            city.text('Current weather of ' + cityName + ', ' + date);
             png.attr('id', 'weatherIcon');
-            console.log(png);
             currentIcon.append(png);
             currentTemp.text(`Temperature: ${tempVal + '°F'}`);
             currentwind.text(`Wind Speed: ${(windVal * 2.23694).toFixed(2)} mph`);
@@ -80,11 +78,8 @@ function getWeather(cityName) {
             } else {
                 // if it is not, then store the city name in local storage
                 searchedCities.push(cityName);
-                console.log(searchedCities);
-                console.log(localStorage);
                 localStorage.setItem('searchedCities', JSON.stringify(searchedCities));
                 // creating a button for the searched city and appending it to the recent searches list
-                console.log(searchedCities);
                 cityButton.text(cityName);
                 searches.append(cityButton);
             }
@@ -100,7 +95,7 @@ function getWeather(cityName) {
                 var card = $('<div class="card"></div>'); // creating a card 
                 var day = $('<h4>' + dateVal + '</h4>'); // creating the date 
                 var png = $('<img src="' + icon + '">'); // creating the icon image 
-                var temp = $('<p>Low Temperature: ' + tempVal + '°F</p>'); // creating the temp value 
+                var temp = $('<p>Temperature: ' + tempVal + '°F</p>'); // creating the temp value 
                 var wind = $('<p>Wind Speed: ' + (windVal * 2.23694).toFixed(2) + ' mph</p>'); // creating the wind speed value 
                 var humidity = $('<p>Humidity: ' + humidityVal + '%</p>'); // creating the humidity value 
 
@@ -118,7 +113,7 @@ function getWeather(cityName) {
 };
 
 // Loop through the searchedCities array and create buttons for each searched city in the local storage
-searchedCities.forEach(function(cityName) {
+searchedCities.forEach(function (cityName) {
     var cityButton = $('<button id="cityButton">');
     cityButton.text(cityName);
     searches.append(cityButton);
